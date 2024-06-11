@@ -12,14 +12,16 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-files = "Dades/IB0*.csv"
+# Obtenim els noms de tots els arxius csv de la nostra carpeta
+arxius = glob.glob("Dades/IB0*.csv")
 
-arxius = glob.glob(files)
-
+# Cream DataFrames auxiliars per aguardar els resultats
 df_Felanitx = pd.DataFrame()
 df_Albufera = pd.DataFrame()
 
+# Llegim i extreim l'arxiu al seu DataFrame corresponent
 for arxiu in arxius:
+
     df = pd.read_csv(arxiu, sep=";", decimal=",",
                     encoding='UTF-16 LE', index_col="Fecha")
     
@@ -29,5 +31,6 @@ for arxiu in arxius:
     elif "Sa Pobla" in arxiu:
         df_Albufera = pd.concat( [df_Felanitx, df] )
 
+# Eliminam dates duplicades
 df_Felanitx = df_Felanitx.drop_duplicates(keep="first")
 df_Albufera = df_Albufera.drop_duplicates(keep="first")
