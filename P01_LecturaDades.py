@@ -63,26 +63,23 @@ fig, ax = plt.subplots(figsize=(15, 8), dpi=300)
 ax.plot(df_Felanitx['Precipitación (mm)'])
 ax.set_xticks(df_Albufera.index[::365]) # 365
 ax.set_ylabel("prcp (mm)")
-
 fig.autofmt_xdate() # Formata les dates del fons 
 
 # Precipitació s'Albufera
 fig, ax = plt.subplots(figsize=(15, 8), dpi=300) 
 ax.plot(df_Albufera['Precipitación (mm)'])
 ax.set_xticks(df_Albufera.index[::365]) # 365
-
 ax.set_ylabel("prcp (mm)")
 fig.autofmt_xdate() # Formata les dates del fons 
 
+# Precipitació grafics combinats
 fig, ax = plt.subplots(figsize=(15, 8), dpi=300) 
-
 ax.plot(df_Albufera['Precipitación (mm)'], 
-        label="s'Albufera")
+        label="s'Albufera", color="midnightblue")
 ax.plot(df_Felanitx['Precipitación (mm)'], 
-        label="Felanitx")
-
+        label="Felanitx", color="yellowgreen")
 ax.set_xticks(df_Albufera.index[::365]) # 365
 ax.set_ylabel("prcp (mm)")
-
 fig.autofmt_xdate() # Formata les dates del fons 
 plt.legend()
+fig.savefig("Images/Prec.jpg")
