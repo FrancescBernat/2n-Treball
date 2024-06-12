@@ -226,3 +226,15 @@ ax.set_xticks(dfAl.index[::3]) # 365
 ax.set_ylabel(r"$\Delta$ T (ºC)")
 fig.autofmt_xdate() # Formata les dates del fons 
 fig.savefig("Images/DTemp2.jpg")
+
+# Grafic de Evotranspiració
+fig, ax = plt.subplots(figsize=(15, 8), dpi=300) 
+ax.plot(dfFe['EtPMon'], 
+        label="Felanitx", color="navy")
+ax.plot(dfAl['EtPMon'], 
+        label="s'Albufera", color="darkseagreen")
+ax.set_xticks(dfAl.index[::3]) # 365
+ax.set_ylabel("Eto (mm)")
+fig.autofmt_xdate() # Formata les dates del fons 
+plt.legend()
+fig.savefig("Images/Eto.jpg")
