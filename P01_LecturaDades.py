@@ -87,9 +87,9 @@ fig.savefig("Images/Prec.jpg")
 # Grafic temperatura combinats
 fig, ax = plt.subplots(figsize=(15, 8), dpi=300) 
 ax.plot(df_Albufera['Temp Media (ºC)'], 
-        label="s'Albufera", color="aquamarine")
+        label="s'Albufera", color="darkkhaki")
 ax.plot(df_Felanitx['Temp Media (ºC)'], 
-        label="Felanitx", color="darkred")
+        label="Felanitx", color="gold")
 ax.set_xticks(df_Albufera.index[::365]) # 365
 ax.set_ylabel("T (ºC)")
 fig.autofmt_xdate() # Formata les dates del fons 
@@ -100,7 +100,7 @@ fig, ax = plt.subplots(figsize=(15, 8), dpi=300)
 ax.plot(df_Felanitx['Temp Media (ºC)'], 
         label="Felanitx", color="darkred")
 ax.plot(df_Albufera['Temp Media (ºC)'], 
-        label="s'Albufera", color="aquamarine")
+        label="s'Albufera", color="gold")
 ax.set_xticks(df_Albufera.index[::365]) # 365
 ax.set_ylabel("T (ºC)")
 fig.autofmt_xdate() # Formata les dates del fons 
