@@ -46,15 +46,42 @@ df_Albufera, df_Felanitx = df_Albufera.align(df_Felanitx,
 
 fig, ax = plt.subplots(figsize=(15, 8), dpi=300) 
 ax.plot(df_Albufera.index, df_Albufera["Humedad Min (%)"], 
-        label="Sa Pobla")
-
+        label="Sa Pobla", color="teal")
 ax.plot(df_Felanitx.index, df_Felanitx["Humedad Min (%)"], 
-        label="Felanitx")
+        label="Felanitx", color="palegreen")
 ax.set_xticks(df_Albufera.index[::365]) # 365
-
+ax.set_ylabel("H (%)")
+ax.set_title("Humitat mínima")
 fig.autofmt_xdate() # Formata les dates del fons 
 plt.legend()
 plt.show()
+fig.savefig("Images/Hmin")
+
+fig, ax = plt.subplots(figsize=(15, 8), dpi=300) 
+ax.plot(df_Albufera.index, df_Albufera["Humedad Max (%)"], 
+        label="Sa Pobla", color="teal")
+ax.plot(df_Felanitx.index, df_Felanitx["Humedad Max (%)"], 
+        label="Felanitx", color="palegreen")
+ax.set_xticks(df_Albufera.index[::365]) # 365
+ax.set_ylabel("H (%)")
+ax.set_title("Humitat màxima")
+fig.autofmt_xdate() # Formata les dates del fons 
+plt.legend()
+plt.show()
+fig.savefig("Images/Hmax")
+
+fig, ax = plt.subplots(figsize=(15, 8), dpi=300) 
+ax.plot(df_Albufera.index, df_Albufera["Humedad Media (%)"], 
+        label="Sa Pobla", color="teal")
+ax.plot(df_Felanitx.index, df_Felanitx["Humedad Media (%)"], 
+        label="Felanitx", color="palegreen")
+ax.set_xticks(df_Albufera.index[::365]) # 365
+ax.set_ylabel("H (%)")
+ax.set_title("Humitat Mitjana")
+fig.autofmt_xdate() # Formata les dates del fons 
+plt.legend()
+plt.show()
+fig.savefig("Images/Hmean")
 
 difHum = df_Albufera["Humedad Media (%)"]-df_Felanitx["Humedad Media (%)"]
 
@@ -87,9 +114,9 @@ fig.savefig("Images/Prec.jpg")
 # Grafic temperatura combinats
 fig, ax = plt.subplots(figsize=(15, 8), dpi=300) 
 ax.plot(df_Albufera['Temp Media (ºC)'], 
-        label="s'Albufera", color="darkkhaki")
+        label="s'Albufera", color="gold")
 ax.plot(df_Felanitx['Temp Media (ºC)'], 
-        label="Felanitx", color="gold")
+        label="Felanitx", color="darkred")
 ax.set_xticks(df_Albufera.index[::365]) # 365
 ax.set_ylabel("T (ºC)")
 fig.autofmt_xdate() # Formata les dates del fons 
@@ -116,3 +143,10 @@ ax.set_xticks(df_Albufera.index[::365]) # 365
 ax.set_ylabel(r"$\Delta$ T (ºC)")
 fig.autofmt_xdate() # Formata les dates del fons 
 fig.savefig("Images/DTemp.jpg")
+
+##################################################################333
+## Sense precipitació
+
+dfAlb2 = df_Albufera[(df_Albufera['Año'] == 2023) & 
+                     (df_Albufera['Dia'] > 151) & 
+                     (df_Albufera['Dia'] < 184)]
