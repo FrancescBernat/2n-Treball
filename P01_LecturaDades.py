@@ -87,7 +87,7 @@ fig.savefig("Images/Prec.jpg")
 # Grafic temperatura combinats
 fig, ax = plt.subplots(figsize=(15, 8), dpi=300) 
 ax.plot(df_Albufera['Temp Media (ºC)'], 
-        label="s'Albufera", color="midnightblue")
+        label="s'Albufera", color="aquamarine")
 ax.plot(df_Felanitx['Temp Media (ºC)'], 
         label="Felanitx", color="darkred")
 ax.set_xticks(df_Albufera.index[::365]) # 365
@@ -96,12 +96,23 @@ fig.autofmt_xdate() # Formata les dates del fons
 plt.legend()
 fig.savefig("Images/Temp.jpg")
 
+fig, ax = plt.subplots(figsize=(15, 8), dpi=300) 
+ax.plot(df_Felanitx['Temp Media (ºC)'], 
+        label="Felanitx", color="darkred")
+ax.plot(df_Albufera['Temp Media (ºC)'], 
+        label="s'Albufera", color="aquamarine")
+ax.set_xticks(df_Albufera.index[::365]) # 365
+ax.set_ylabel("T (ºC)")
+fig.autofmt_xdate() # Formata les dates del fons 
+plt.legend()
+fig.savefig("Images/Temp2.jpg")
+
 # Diferencia de Temperatures
 dT = df_Felanitx['Temp Media (ºC)']-df_Albufera['Temp Media (ºC)']
 fig, ax = plt.subplots(figsize=(15, 8), dpi=300) 
 ax.plot(dT, color="midnightblue")
 ax.plot([np.nanmedian(dT)]*len(dT), '--')
 ax.set_xticks(df_Albufera.index[::365]) # 365
-ax.set_ylabel("T (ºC)")
+ax.set_ylabel(r"$\Delta$ T (ºC)")
 fig.autofmt_xdate() # Formata les dates del fons 
 fig.savefig("Images/DTemp.jpg")
