@@ -168,7 +168,7 @@ plt.legend()
 plt.show()
 fig.savefig("Images/Hmin2")
 
-ffig, ax = plt.subplots(figsize=(15, 8), dpi=300) 
+fig, ax = plt.subplots(figsize=(15, 8), dpi=300) 
 ax.plot(dfAl.index, dfAl["Humedad Max (%)"], 
         label="Sa Pobla", color="teal")
 ax.plot(dfFe.index, dfFe["Humedad Max (%)"], 
@@ -193,3 +193,36 @@ fig.autofmt_xdate() # Formata les dates del fons
 plt.legend()
 plt.show()
 fig.savefig("Images/Hmean2")
+
+# Grafic temperatura combinats
+fig, ax = plt.subplots(figsize=(15, 8), dpi=300) 
+ax.plot(dfAl['Temp Media (ºC)'], 
+        label="s'Albufera", color="gold")
+ax.plot(dfFe['Temp Media (ºC)'], 
+        label="Felanitx", color="darkred")
+ax.set_xticks(dfAl.index[::3]) # 365
+ax.set_ylabel("T (ºC)")
+fig.autofmt_xdate() # Formata les dates del fons 
+plt.legend()
+fig.savefig("Images/Temp12.jpg")
+
+fig, ax = plt.subplots(figsize=(15, 8), dpi=300) 
+ax.plot(dfFe['Temp Media (ºC)'], 
+        label="Felanitx", color="darkred")
+ax.plot(dfAl['Temp Media (ºC)'], 
+        label="s'Albufera", color="gold")
+ax.set_xticks(dfAl.index[::3]) # 365
+ax.set_ylabel("T (ºC)")
+fig.autofmt_xdate() # Formata les dates del fons 
+plt.legend()
+fig.savefig("Images/Temp22.jpg")
+
+# Diferencia de Temperatures
+dT = dfFe['Temp Media (ºC)']-dfAl['Temp Media (ºC)']
+fig, ax = plt.subplots(figsize=(15, 8), dpi=300) 
+ax.plot(dT, color="midnightblue")
+ax.plot([np.nanmedian(dT)]*len(dT), '--')
+ax.set_xticks(dfAl.index[::3]) # 365
+ax.set_ylabel(r"$\Delta$ T (ºC)")
+fig.autofmt_xdate() # Formata les dates del fons 
+fig.savefig("Images/DTemp2.jpg")
