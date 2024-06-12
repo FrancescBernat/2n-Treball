@@ -40,11 +40,15 @@ for arxiu in arxius:
 df_Felanitx = df_Felanitx.drop_duplicates(keep="first")
 df_Albufera = df_Albufera.drop_duplicates(keep="first")
 
+df_Albufera, df_Felanitx = df_Albufera.align(df_Felanitx,
+                                             join='inner', 
+                                             axis=0)
+
 fig, ax = plt.subplots(figsize=(15, 8), dpi=300) 
-ax.scatter(df_Albufera.index, df_Albufera["Humedad Min (%)"], 
+ax.plot(df_Albufera.index, df_Albufera["Humedad Min (%)"], 
         label="Sa Pobla")
 
-ax.scatter(df_Felanitx.index, df_Felanitx["Humedad Min (%)"], 
+ax.plot(df_Felanitx.index, df_Felanitx["Humedad Min (%)"], 
         label="Felanitx")
 ax.set_xticks(df_Albufera.index[::365]) # 365
 
@@ -71,10 +75,11 @@ ax.set_ylabel("prcp (mm)")
 fig.autofmt_xdate() # Formata les dates del fons 
 
 fig, ax = plt.subplots(figsize=(15, 8), dpi=300) 
-ax.plot(df_Felanitx['Precipitación (mm)'], 
-        label="Felanitx")
+
 ax.plot(df_Albufera['Precipitación (mm)'], 
         label="s'Albufera")
+ax.plot(df_Felanitx['Precipitación (mm)'], 
+        label="Felanitx")
 
 ax.set_xticks(df_Albufera.index[::365]) # 365
 ax.set_ylabel("prcp (mm)")
