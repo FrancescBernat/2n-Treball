@@ -147,6 +147,10 @@ fig.savefig("Images/DTemp.jpg")
 ##################################################################333
 ## Sense precipitació
 
-dfAlb2 = df_Albufera[(df_Albufera['Año'] == 2023) & 
+dfAl = df_Albufera[(df_Albufera['Año'] == 2023) & 
                      (df_Albufera['Dia'] > 151) & 
                      (df_Albufera['Dia'] < 184)]
+
+dfFe = df_Felanitx[(df_Felanitx['Año'] == 2023) & 
+                     (df_Felanitx['Dia'] > 151) & 
+                     (df_Felanitx['Dia'] < 184)]
