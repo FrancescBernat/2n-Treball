@@ -44,6 +44,22 @@ df_Albufera, df_Felanitx = df_Albufera.align(df_Felanitx,
                                              join='inner', 
                                              axis=0)
 
+def f_q(T, P, HR):      
+    """
+        Funció per a calcular la humitat especifica a partir
+        de la humitat relativa.
+
+        S'ha extret del treball anterior
+    """
+    alfa = 18.0153e-3 / 28.9644e-3
+    e_sat = 6.112 * np.exp( 17.67 * T/(T + 243.5) )
+
+    rsat = alfa * e_sat / (P - e_sat)
+
+    q = 0.001 * HR / rsat
+
+    return q
+
 fig, ax = plt.subplots(figsize=(15, 8), dpi=300) 
 ax.plot(df_Albufera.index, df_Albufera["Humedad Min (%)"], 
         label="Sa Pobla", color="teal")
@@ -148,19 +164,19 @@ fig.savefig("Images/DTemp.jpg")
 ## Sense precipitació
 
 dfAl = df_Albufera[(df_Albufera['Año'] == 2023) & 
-                     (df_Albufera['Dia'] > 181) & 
-                     (df_Albufera['Dia'] < 213)]
+                     (df_Albufera['Dia'] > 61) & 
+                     (df_Albufera['Dia'] < 334)]
 
 dfFe = df_Felanitx[(df_Felanitx['Año'] == 2023) & 
-                     (df_Felanitx['Dia'] > 181) & 
-                     (df_Felanitx['Dia'] < 213)]
+                     (df_Felanitx['Dia'] > 61) & 
+                     (df_Felanitx['Dia'] < 334)]
 
 fig, ax = plt.subplots(figsize=(15, 8), dpi=300) 
 ax.plot(dfAl.index, dfAl["Humedad Min (%)"], 
         label="Sa Pobla", color="teal")
 ax.plot(dfFe.index, dfFe["Humedad Min (%)"], 
         label="Felanitx", color="palegreen")
-ax.set_xticks(dfAl.index[::5]) # 365
+ax.set_xticks(dfAl.index[::12]) # 365
 ax.set_ylabel("H (%)")
 ax.set_title("Humitat mínima")
 fig.autofmt_xdate() # Formata les dates del fons 
@@ -173,7 +189,7 @@ ax.plot(dfAl.index, dfAl["Humedad Max (%)"],
         label="Sa Pobla", color="teal")
 ax.plot(dfFe.index, dfFe["Humedad Max (%)"], 
         label="Felanitx", color="palegreen")
-ax.set_xticks(dfAl.index[::5]) # 365
+ax.set_xticks(dfAl.index[::12]) # 365
 ax.set_ylabel("H (%)")
 ax.set_title("Humitat màxima")
 fig.autofmt_xdate() # Formata les dates del fons 
@@ -186,7 +202,7 @@ ax.plot(dfAl.index, dfAl["Humedad Media (%)"],
         label="Sa Pobla", color="teal")
 ax.plot(dfFe.index, dfFe["Humedad Media (%)"], 
         label="Felanitx", color="palegreen")
-ax.set_xticks(dfAl.index[::5]) # 365
+ax.set_xticks(dfAl.index[::12]) # 365
 ax.set_ylabel("H (%)")
 ax.set_title("Humitat mitjana")
 fig.autofmt_xdate() # Formata les dates del fons 
@@ -200,7 +216,7 @@ ax.plot(dfAl['Temp Media (ºC)'],
         label="s'Albufera", color="gold")
 ax.plot(dfFe['Temp Media (ºC)'], 
         label="Felanitx", color="darkred")
-ax.set_xticks(dfAl.index[::3]) # 365
+ax.set_xticks(dfAl.index[::12]) # 365
 ax.set_ylabel("T (ºC)")
 fig.autofmt_xdate() # Formata les dates del fons 
 plt.legend()
@@ -211,7 +227,7 @@ ax.plot(dfFe['Temp Media (ºC)'],
         label="Felanitx", color="darkred")
 ax.plot(dfAl['Temp Media (ºC)'], 
         label="s'Albufera", color="gold")
-ax.set_xticks(dfAl.index[::3]) # 365
+ax.set_xticks(dfAl.index[::12]) # 365
 ax.set_ylabel("T (ºC)")
 fig.autofmt_xdate() # Formata les dates del fons 
 plt.legend()
@@ -222,7 +238,7 @@ dT = dfFe['Temp Media (ºC)']-dfAl['Temp Media (ºC)']
 fig, ax = plt.subplots(figsize=(15, 8), dpi=300) 
 ax.plot(dT, color="midnightblue")
 ax.plot([np.nanmedian(dT)]*len(dT), '--')
-ax.set_xticks(dfAl.index[::3]) # 365
+ax.set_xticks(dfAl.index[::12]) # 365
 ax.set_ylabel(r"$\Delta$ T (ºC)")
 fig.autofmt_xdate() # Formata les dates del fons 
 fig.savefig("Images/DTemp2.jpg")
@@ -233,7 +249,7 @@ ax.plot(dfFe['EtPMon'],
         label="Felanitx", color="navy")
 ax.plot(dfAl['EtPMon'], 
         label="s'Albufera", color="darkseagreen")
-ax.set_xticks(dfAl.index[::3]) # 365
+ax.set_xticks(dfAl.index[::12]) # 365
 ax.set_ylabel("Eto (mm)")
 fig.autofmt_xdate() # Formata les dates del fons 
 plt.legend()
