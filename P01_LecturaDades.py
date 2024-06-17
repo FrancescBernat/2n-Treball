@@ -107,6 +107,9 @@ def f_q(T, HR, P=1013):
 
     return q
 
+###############################################################
+# Mitjana
+
 q_Alb = f_q(df_Albufera["Temp Media (ºC)"], 
             df_Albufera["Humedad Media (%)"])
 q_Fel = f_q(df_Felanitx["Temp Media (ºC)"], 
@@ -119,14 +122,93 @@ ax.plot(df_Albufera.index, q_Alb,
 ax.plot(df_Felanitx.index, q_Fel, 
         label="Felanitx", color="palegreen")
 ax.set_xticks(df_Albufera.index[::365]) # 365
-ax.set_ylabel("H (%)")
+ax.set_ylabel("H (g/Kg)")
 ax.set_title("Humitat Especifica Mitjana")
 fig.autofmt_xdate() # Formata les dates del fons 
 plt.legend()
 plt.show()
 fig.savefig("Images/Specific_Hmean.jpg")
 
+fig, ax = plt.subplots(figsize=(15, 8), dpi=300) 
+ax.plot(df_Albufera.index, q_Alb-q_Fel, color="midnightblue")
+ax.plot(df_Albufera.index, [np.mean(q_Alb-q_Fel)]*len(df_Albufera),
+        color="lightcyan", linestyle="--")
+ax.set_xticks(df_Albufera.index[::365]) # 365
+ax.set_ylabel(r"$\Delta$ H (g/Kg)")
+ax.set_title("Diferencies d'humitat especifica mitjana")
+fig.autofmt_xdate() # Formata les dates del fons 
+plt.show()
+fig.savefig("Images/Diff_H.jpg")
+
+###############################################################
+# Mínima
+
+q_Alb = f_q(df_Albufera["Temp Mínima (ºC)"], 
+            df_Albufera["Humedad Min (%)"])
+q_Fel = f_q(df_Felanitx["Temp Mínima (ºC)"], 
+            df_Felanitx["Humedad Min (%)"])
+
+fig, ax = plt.subplots(figsize=(15, 8), dpi=300) 
+ax.plot(df_Albufera.index, q_Alb, 
+        label="Sa Pobla", color="teal")
+ax.plot(df_Felanitx.index, q_Fel, 
+        label="Felanitx", color="palegreen")
+ax.set_xticks(df_Albufera.index[::365]) # 365
+ax.set_ylabel("H (g/Kg)")
+ax.set_title("Humitat Especifica Mínima")
+fig.autofmt_xdate() # Formata les dates del fons 
+plt.legend()
+plt.show()
+fig.savefig("Images/Specific_Hmin.jpg")
+
+fig, ax = plt.subplots(figsize=(15, 8), dpi=300) 
+ax.plot(df_Albufera.index, q_Alb-q_Fel, color="midnightblue")
+ax.plot(df_Albufera.index, [np.mean(q_Alb-q_Fel)]*len(df_Albufera),
+        color="lightcyan", linestyle="--")
+ax.set_xticks(df_Albufera.index[::365]) # 365
+ax.set_ylabel(r"$\Delta$ H (g/Kg)")
+ax.set_title("Diferencies d'humitat especifica mínima")
+fig.autofmt_xdate() # Formata les dates del fons 
+plt.show()
+fig.savefig("Images/Diff_Hmin.jpg")
+
+###############################################################
+# Máxima
+
+q_Alb = f_q(df_Albufera["Temp Max (ºC)"], 
+            df_Albufera["Humedad Max (%)"])
+q_Fel = f_q(df_Felanitx["Temp Max (ºC)"], 
+            df_Felanitx["Humedad Max (%)"])
+
+fig, ax = plt.subplots(figsize=(15, 8), dpi=300) 
+ax.plot(df_Albufera.index, q_Alb, 
+        label="Sa Pobla", color="teal")
+ax.plot(df_Felanitx.index, q_Fel, 
+        label="Felanitx", color="palegreen")
+ax.set_xticks(df_Albufera.index[::365]) # 365
+ax.set_ylabel("H (g/Kg)")
+ax.set_title("Humitat Especifica Màxima")
+fig.autofmt_xdate() # Formata les dates del fons 
+plt.legend()
+plt.show()
+fig.savefig("Images/Specific_Hmax.jpg")
+
+fig, ax = plt.subplots(figsize=(15, 8), dpi=300) 
+ax.plot(df_Albufera.index, q_Alb-q_Fel, color="midnightblue")
+ax.plot(df_Albufera.index, [np.mean(q_Alb-q_Fel)]*len(df_Albufera),
+        color="lightcyan", linestyle="--")
+ax.set_xticks(df_Albufera.index[::365]) # 365
+ax.set_ylabel(r"$\Delta$ H (g/Kg)")
+ax.set_title("Diferencies d'humitat especifica màxima")
+fig.autofmt_xdate() # Formata les dates del fons 
+plt.show()
+fig.savefig("Images/Diff_Hmax.jpg")
+
 difHum = df_Albufera["Humedad Media (%)"]-df_Felanitx["Humedad Media (%)"]
+
+#####################################################################
+############# PRECIPITACIÓ
+#####################################################################
 
 # Precipitació Felanitx
 fig, ax = plt.subplots(figsize=(15, 8), dpi=300) 
@@ -153,6 +235,11 @@ ax.set_ylabel("prcp (mm)")
 fig.autofmt_xdate() # Formata les dates del fons 
 plt.legend()
 fig.savefig("Images/Prec.jpg")
+
+#####################################################################
+############# TEMPERATURES
+#####################################################################
+
 
 # Grafic temperatura combinats
 fig, ax = plt.subplots(figsize=(15, 8), dpi=300) 
