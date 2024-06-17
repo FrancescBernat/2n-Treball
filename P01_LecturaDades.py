@@ -292,7 +292,7 @@ ax.plot(dfFe.index, dfFe["Humedad Min (%)"],
         label="Felanitx", color="palegreen")
 ax.set_xticks(dfAl.index[::12]) # 365
 ax.set_ylabel("H (%)")
-ax.set_title("Humitat mínima")
+ax.set_title("Humitat relativa mínima")
 fig.autofmt_xdate() # Formata les dates del fons 
 plt.legend()
 plt.show()
@@ -305,7 +305,7 @@ ax.plot(dfFe.index, dfFe["Humedad Max (%)"],
         label="Felanitx", color="palegreen")
 ax.set_xticks(dfAl.index[::12]) # 365
 ax.set_ylabel("H (%)")
-ax.set_title("Humitat màxima")
+ax.set_title("Humitat relativa màxima")
 fig.autofmt_xdate() # Formata les dates del fons 
 plt.legend()
 plt.show()
@@ -318,7 +318,7 @@ ax.plot(dfFe.index, dfFe["Humedad Media (%)"],
         label="Felanitx", color="palegreen")
 ax.set_xticks(dfAl.index[::12]) # 365
 ax.set_ylabel("H (%)")
-ax.set_title("Humitat mitjana")
+ax.set_title("Humitat relativa mitjana")
 fig.autofmt_xdate() # Formata les dates del fons 
 plt.legend()
 plt.show()
@@ -368,3 +368,98 @@ ax.set_ylabel("Eto (mm)")
 fig.autofmt_xdate() # Formata les dates del fons 
 plt.legend()
 fig.savefig("Images/Eto.jpg")
+
+
+q_Alb = f_q(dfAl["Temp Media (ºC)"], 
+            dfAl["Humedad Media (%)"])
+q_Fel = f_q(dfFe["Temp Media (ºC)"], 
+            dfFe["Humedad Media (%)"])
+
+
+fig, ax = plt.subplots(figsize=(15, 8), dpi=300) 
+ax.plot(dfAl.index, q_Alb, 
+        label="Sa Pobla", color="navy")
+ax.plot(dfFe.index, q_Fel, 
+        label="Felanitx", color="darkseagreen")
+ax.set_xticks(dfAl.index[::12]) # 365
+ax.set_ylabel("H (g/Kg)")
+ax.set_title("Humitat Especifica Mitjana")
+fig.autofmt_xdate() # Formata les dates del fons 
+plt.legend()
+plt.show()
+fig.savefig("Images/Specific_Hmean2.jpg")
+
+fig, ax = plt.subplots(figsize=(15, 8), dpi=300) 
+ax.plot(dfAl.index, q_Alb-q_Fel, color="maroon")
+ax.plot(dfAl.index, [np.mean(q_Alb-q_Fel)]*len(dfAl),
+        color="darkblue", linestyle="--")
+ax.set_xticks(dfAl.index[::12]) # 365
+ax.set_ylabel(r"$\Delta$ H (g/Kg)")
+ax.set_title("Diferencies d'humitat especifica mitjana")
+fig.autofmt_xdate() # Formata les dates del fons 
+plt.show()
+fig.savefig("Images/Diff_H2.jpg")
+
+###############################################################
+# Mínima
+
+q_Alb = f_q(dfAl["Temp Mínima (ºC)"], 
+            dfAl["Humedad Min (%)"])
+q_Fel = f_q(dfFe["Temp Mínima (ºC)"], 
+            dfFe["Humedad Min (%)"])
+
+fig, ax = plt.subplots(figsize=(15, 8), dpi=300) 
+ax.plot(dfAl.index, q_Alb, 
+        label="Sa Pobla", color="navy")
+ax.plot(dfAl.index, q_Fel, 
+        label="Felanitx", color="darkseagreen")
+ax.set_xticks(dfAl.index[::12]) # 365
+ax.set_ylabel("H (g/Kg)")
+ax.set_title("Humitat Especifica Mínima")
+fig.autofmt_xdate() # Formata les dates del fons 
+plt.legend()
+plt.show()
+fig.savefig("Images/Specific_Hmin2.jpg")
+
+fig, ax = plt.subplots(figsize=(15, 8), dpi=300) 
+ax.plot(dfAl.index, q_Alb-q_Fel, color="maroon")
+ax.plot(dfAl.index, [np.mean(q_Alb-q_Fel)]*len(dfAl),
+        color="darkblue", linestyle="--")
+ax.set_xticks(dfAl.index[::12]) # 365
+ax.set_ylabel(r"$\Delta$ H (g/Kg)")
+ax.set_title("Diferencies d'humitat especifica mínima")
+fig.autofmt_xdate() # Formata les dates del fons 
+plt.show()
+fig.savefig("Images/Diff_Hmin2.jpg")
+
+###############################################################
+# Máxima
+
+q_Alb = f_q(dfAl["Temp Max (ºC)"], 
+            dfAl["Humedad Max (%)"])
+q_Fel = f_q(dfFe["Temp Max (ºC)"], 
+            dfFe["Humedad Max (%)"])
+
+fig, ax = plt.subplots(figsize=(15, 8), dpi=300) 
+ax.plot(dfAl.index, q_Alb, 
+        label="Sa Pobla", color="navy")
+ax.plot(dfFe.index, q_Fel, 
+        label="Felanitx", color="darkseagreen")
+ax.set_xticks(dfAl.index[::12]) # 365
+ax.set_ylabel("H (g/Kg)")
+ax.set_title("Humitat Especifica Màxima")
+fig.autofmt_xdate() # Formata les dates del fons 
+plt.legend()
+plt.show()
+fig.savefig("Images/Specific_Hmax2.jpg")
+
+fig, ax = plt.subplots(figsize=(15, 8), dpi=300) 
+ax.plot(dfAl.index, q_Alb-q_Fel, color="maroon")
+ax.plot(dfAl.index, [np.mean(q_Alb-q_Fel)]*len(dfAl),
+        color="darkblue", linestyle="--")
+ax.set_xticks(dfAl.index[::12]) # 365
+ax.set_ylabel(r"$\Delta$ H (g/Kg)")
+ax.set_title("Diferencies d'humitat especifica màxima")
+fig.autofmt_xdate() # Formata les dates del fons 
+plt.show()
+fig.savefig("Images/Diff_Hmax2.jpg")
